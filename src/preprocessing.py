@@ -67,3 +67,30 @@ for j in range(i + 1, len(axes)):
 fig.suptitle("Outliers for all Numeric Columns", fontsize=22, fontweight='bold', y=1.03) # --->> adds a main title to the entire figure, describing what the plot shows.
 plt.tight_layout() # --->> adjusts subplot spacing so titles and labels don’t overlap.
 plt.show()
+
+# now lets count how many unique values in each columns using line graph
+
+# calculate number of unique values per column
+unique_counts = {col: df[col].nunique() for col in df.columns} 
+
+# prepare data for plotting
+columns = list(unique_counts.keys()) # -->> list of all column names
+counts = list(unique_counts.values()) # -->> list of all unique values
+
+plt.figure(figsize=(12,6)) # figure
+
+sns.lineplot(x = columns, y = counts, marker = 'o') # plots the line
+plt.xticks(rotation=45, ha='right') # this will rotate the name diagonal
+plt.title("Number of Unique Values per Column", fontsize=18) # title
+plt.xlabel("Columns", fontsize=14) 
+plt.ylabel("Number of Unique Values", fontsize=14)
+plt.grid(True) # true for better experience
+plt.tight_layout() # auto adjust the subplot parameters to prevent overlaps
+plt.show() # -->> display the plot
+
+
+# we can use this for loop (optional) to view unique values in each columns
+for column in df.columns:
+    print(f"{column}: Number of unique values {df[column].nunique()}")
+    print("==========================================================")
+
